@@ -1,5 +1,10 @@
 name: "build"
 on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   launch-linux:
     runs-on: ubuntu-latest
